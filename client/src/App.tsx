@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import Contact from "./pages/Contact";
 import { ProductList, Product } from "./components/ProductList";
 import { Cart, CartItem } from "./components/Cart";
 
@@ -44,22 +46,26 @@ export default function App() {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: "1100px",
-        margin: "40px auto",
-        padding: "32px",
-        background: "#fafafa",
-        minHeight: "100vh",
-        borderRadius: "20px",
-      }}
-    >
-      <ProductList
-        products={products}
-        setProducts={setProducts}
-        onAddToCart={handleAddToCart}
-      />
-      <Cart cartItems={cartItems} setCartItems={setCartItems} />
+    <div>
+      <Navbar />
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "40px auto",
+          padding: "32px",
+          background: "#fafafa",
+          minHeight: "100vh",
+          borderRadius: "20px",
+        }}
+      >
+        <ProductList
+          products={products}
+          setProducts={setProducts}
+          onAddToCart={handleAddToCart}
+        />
+        <Cart cartItems={cartItems} setCartItems={setCartItems} />
+      </div>
+      <Contact />
     </div>
   );
 }
