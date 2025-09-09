@@ -85,5 +85,5 @@ return (
 - received messages will be stored in the backend API (app.ts) 
 
 # I make some changes to the "send message" button. 
-- styled: text, background, hoover effect etc.
+- styled: text, background, hoover effect
 
