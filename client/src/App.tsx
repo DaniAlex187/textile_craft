@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
 import { ProductList, Product } from "./components/ProductList";
 import { Cart, CartItem } from "./components/Cart";
@@ -66,6 +67,7 @@ export default function App() {
         <Cart cartItems={cartItems} setCartItems={setCartItems} />
       </div>
       <Contact />
+      <Footer />
     </div>
   );
 }
