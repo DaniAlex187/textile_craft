@@ -355,17 +355,98 @@ const Contact: React.FC = () => {
             type="submit"
             disabled={isSubmitting}
             style={{
-              background: isSubmitting ? '#6c757d' : '#2c3e50',
+              background: isSubmitting 
+                ? 'linear-gradient(135deg, #6c757d, #5a6268)' 
+                : 'linear-gradient(135deg, #2c3e50, #34495e)',
               color: 'white',
               padding: '1rem 2rem',
               border: 'none',
-              borderRadius: '5px',
+              borderRadius: '12px',
               fontSize: '1.1rem',
+              fontWeight: '500',
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              transition: 'background 0.3s'
+              transition: 'all 0.3s ease',
+              boxShadow: isSubmitting 
+                ? '0 4px 15px rgba(108, 117, 125, 0.3)' 
+                : '0 6px 20px rgba(44, 62, 80, 0.4)',
+              transform: 'translateY(0)',
+              position: 'relative',
+              overflow: 'visible',
+              zIndex: '1'
+            }}
+            onMouseEnter={(e) => {
+              if (!isSubmitting) {
+                // Colorful rounded border that fits the button perfectly
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(44, 62, 80, 0.4), 0 0 0 2px #667eea, 0 0 0 4px rgba(118, 75, 162, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isSubmitting) {
+                // Return to original shadow
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(44, 62, 80, 0.4)';
+              }
+            }}
+            onMouseDown={(e) => {
+              if (!isSubmitting) {
+                e.currentTarget.style.transform = 'translateY(1px)';
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(44, 62, 80, 0.3)';
+              }
+            }}
+            onMouseUp={(e) => {
+              if (!isSubmitting) {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(44, 62, 80, 0.5)';
+              }
             }}
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            <span style={{
+              position: 'relative',
+              zIndex: 1
+            }}>
+              {isSubmitting ? (
+                <>
+                  <span style={{
+                    display: 'inline-block',
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid transparent',
+                    borderTop: '2px solid white',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite',
+                    marginRight: '8px'
+                  }}></span>
+                  Sending...
+                </>
+              ) : (
+                'Send Message'
+              )}
+            </span>
+            
+            {/* Ripple effect overlay */}
+            <style>{`
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              
+              button:not(:disabled)::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+              }
+              
+              button:not(:disabled):active::before {
+                width: 300px;
+                height: 300px;
+              }
+            `}</style>
           </button>
         </form>
       </div>
